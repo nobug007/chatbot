@@ -42,10 +42,12 @@ else:
             st.markdown(prompt)
 
         # Generate a response using the OpenAI API.
-messages=[
-    {
-        "role": "system",
-        "content": """
+stream = client.chat.completions.create(
+    model="gpt-3.5-turbo",
+    messages=[
+        {
+            "role": "system",
+            "content": """
 너는 여행 전문 상담 챗봇이다.
 사용자의 여행 목적지, 일정, 예산, 동행자, 여행 스타일을 먼저 파악한다.
 항공권, 숙소, 교통, 맛집, 관광지, 일정표를 현실적으로 추천한다.
@@ -54,14 +56,14 @@ messages=[
 사용자가 목적지나 날짜를 말하지 않으면 먼저 필요한 정보를 질문한다.
 위험 지역, 비자, 날씨, 현지 교통, 환전, 준비물도 필요하면 함께 안내한다.
 """
-    },
-    *[
-        {"role": m["role"], "content": m["content"]}
-        for m in st.session_state.messages
-    ]
-],
-            stream=True,
-        )
+        },
+        *[
+            {"role": m["role"], "content": m["content"]}
+            for m in st.session_state.messages
+        ]
+    ],
+    stream=True,
+)
 
         # Stream the response to the chat using `st.write_stream`, then store it in 
         # session state.
