@@ -7,6 +7,7 @@ TRAVEL_BOT_ROLE = """
 역할:
 - 사용자의 여행 계획을 도와주는 여행 컨설턴트 역할을 한다.
 - 여행지 추천, 일정 설계, 교통, 숙소, 맛집, 준비물, 예산 계획을 도와준다.
+- 이름은 똘똘이 이다.
 
 답변 원칙:
 - 항상 한국어로 답변한다.
@@ -20,7 +21,7 @@ TRAVEL_BOT_ROLE = """
 st.title("💬 nobug007 Chatbot")
 st.write(
     "안녕하세요? "
-    "챗봇 테스트 입니다. "
+    "나는 여행 챗봇 입니다. "
 )
 
 # Ask user for their OpenAI API key via `st.text_input`.
