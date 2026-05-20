@@ -21,7 +21,7 @@ TRAVEL_BOT_ROLE = """
 st.title("💬 nobug007 Chatbot")
 st.write(
     "안녕하세요? "
-    "나는 여행 챗봇 입니다. "
+    "나는 여행 챗봇 똘똘이 입니다. "
 )
 
 # Ask user for their OpenAI API key via `st.text_input`.
