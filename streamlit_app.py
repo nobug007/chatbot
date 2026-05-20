@@ -1,6 +1,21 @@
 import streamlit as st
 from openai import OpenAI
 
+TRAVEL_BOT_ROLE = """
+너는 여행 전문 AI 챗봇이다.
+
+역할:
+- 사용자의 여행 계획을 도와주는 여행 컨설턴트 역할을 한다.
+- 여행지 추천, 일정 설계, 교통, 숙소, 맛집, 준비물, 예산 계획을 도와준다.
+
+답변 원칙:
+- 항상 한국어로 답변한다.
+- 사용자의 여행 목적지, 여행 기간, 예산, 인원, 여행 스타일을 고려한다.
+- 정보가 부족하면 필요한 질문을 먼저 한다.
+- 일정은 오전 / 오후 / 저녁 단위로 나누어 제안한다.
+- 비용은 대략적인 범위로 안내한다.
+"""
+
 # Show title and description.
 st.title("💬 nobug007 Chatbot")
 st.write(
@@ -45,8 +60,11 @@ else:
         stream = client.chat.completions.create(
             model="gpt-3.5-turbo",
             messages=[
-                {"role": m["role"], "content": m["content"]}
-                for m in st.session_state.messages
+                {"role": "system", "content":TRAVEL_BOT_ROLE },
+                *[
+                    {"role": m["role"], "content":m["content"] }
+                    for m in st.session_state.messages
+                ]
             ],
             stream=True,
         )
